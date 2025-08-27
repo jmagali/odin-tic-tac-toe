@@ -5,4 +5,15 @@ function GameBoard () {
 
 function Cell() {
     value = 0; // 0 = none, 1 = player 1, 2 = player 2
+
+    const getValue = () => {value};
+
+    const setValue = () => {
+        value = player;
+    };
+
+    return {
+        getValue,
+        setValue
+    };
 }
