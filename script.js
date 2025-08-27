@@ -83,6 +83,8 @@ function detectWinner(board) {
     if (diagRight.every(cell => cell.getValue() === diagRight[0][0].getValue)) {
         return diagRight[0][0].getValue();
     }
+
+    return null;
 }
 
 const controller = (function GameController() {
