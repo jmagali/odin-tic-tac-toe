@@ -61,12 +61,15 @@ function detectWinner(board) {
     let diagLeft = [];
     let diagRight = [];
 
+    // Loop through all rows
     for (let i = 0; i < boardLength; i++) {
         let cellOne = board[i][0].getValue();
 
+        // Push each diagonal to a left or right array
         diagLeft.push(board[i][i].getValue());
         diagRight.push(board[i][boardLength - 1 - i].getValue());
 
+        // If the first cell of the row is not zero, check if the row/column is the same
         if (cellOne) {
             if (board[i].every(cell => cell.getValue() === cellOne) ||
                 board.every(row => row[i].getValue() === cellOne)
@@ -76,6 +79,7 @@ function detectWinner(board) {
         }
     }
 
+    // Check if somebody has won diagonally
     if (diagLeft.every(cell => cell === diagLeft[0])) {
         return diagLeft[0];
     }
@@ -84,6 +88,7 @@ function detectWinner(board) {
         return diagRight[0];
     }
 
+    // In the case of no winner
     return null;
 }
 
