@@ -58,9 +58,14 @@ function playRound() {
 
 function detectWinner(board) {
     let boardLength = board[0].length;
+    let diagLeft = [];
+    let diagRight = [];
 
     for (let i = 0; i < boardLength; i++) {
         let cellOne = board[i][0].getValue();
+
+        diagLeft.push(board[i][i].getValue());
+        diagRight.push(board[i][boardLength - 1 - i].getValue());
 
         if (cellOne) {
             if (board[i].every(cell => cell.getValue() === cellOne) ||
@@ -69,6 +74,14 @@ function detectWinner(board) {
                 return cellOne;
             }
         }
+    }
+
+    if (diagLeft.every(cell => cell.getValue() === diagLeft[0][0].getValue)) {
+        return diagLeft[0][0].getValue();
+    }
+
+    if (diagRight.every(cell => cell.getValue() === diagRight[0][0].getValue)) {
+        return diagRight[0][0].getValue();
     }
 }
 
