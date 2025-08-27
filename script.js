@@ -1,6 +1,8 @@
 function GameBoard () {
     const length = 3;
-    const board = Array.from({length}, Array.from(({length}), () => Cell()));
+    const board = Array.from({length}, 
+                  Array.from(({length}), 
+                  () => Cell()));
 
 }
 
