@@ -9,9 +9,9 @@ function GameBoard () {
 function Cell() {
     let value = 0; // 0 = none, 1 = player 1, 2 = player 2
 
-    const getValue = () => {value};
+    const getValue = () => value;
 
-    const setValue = () => {
+    const setValue = (player) => {
         value = player;
     };
 
