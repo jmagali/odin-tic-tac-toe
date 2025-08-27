@@ -49,8 +49,31 @@ function Cell() {
     };
 }
 
+function playRound() {
+    let activePlayer = activePlater === players[0] ? players[1] : players[0];
+
+    const game = GameBoard();
+    game.printBoard();
+}
+
+function detectWinner(board) {
+    let boardLength = board[0].length;
+
+    for (let i = 0; i < boardLength; i++) {
+        let cellOne = board[i][0].getValue();
+
+        if (cellOne) {
+            if (board[i].every(cell => cell.getValue() === cellOne) ||
+                board.every(row => row[i].getValue() === cellOne)
+            ) {
+                return cellOne;
+            }
+        }
+    }
+}
+
 const controller = (function GameController() {
-    players = [];
+    let players = [];
 
     for (let i = 0; i < 2; i++) {
         let name = prompt(`What is Player ${i + 1}'s name?`);
@@ -60,10 +83,4 @@ const controller = (function GameController() {
             value: i + 1
         });
     }
-
-    const game = GameBoard();
-    game.printBoard();
-
-    console.log(players);
-
 })();
