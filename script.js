@@ -49,5 +49,21 @@ function Cell() {
     };
 }
 
-const game = GameBoard();
-game.printBoard();
+const controller = (function GameController() {
+    players = [];
+
+    for (let i = 0; i < 2; i++) {
+        let name = prompt(`What is Player ${i + 1}'s name?`);
+
+        players.push({
+            name,
+            value: i + 1
+        });
+    }
+
+    const game = GameBoard();
+    game.printBoard();
+
+    console.log(players);
+
+})();
