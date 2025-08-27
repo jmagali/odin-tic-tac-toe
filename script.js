@@ -76,12 +76,12 @@ function detectWinner(board) {
         }
     }
 
-    if (diagLeft.every(cell => cell.getValue() === diagLeft[0][0].getValue)) {
-        return diagLeft[0][0].getValue();
+    if (diagLeft.every(cell => cell === diagLeft[0])) {
+        return diagLeft[0];
     }
 
-    if (diagRight.every(cell => cell.getValue() === diagRight[0][0].getValue)) {
-        return diagRight[0][0].getValue();
+    if (diagRight.every(cell => cell === diagRight[0])) {
+        return diagRight[0];
     }
 
     return null;
