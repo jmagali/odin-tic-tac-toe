@@ -4,6 +4,9 @@ function GameBoard () {
                   Array.from(({length}), 
                   () => Cell()));
 
+    const getBoard = () => board;
+
+    return {getBoard};
 }
 
 function Cell() {
