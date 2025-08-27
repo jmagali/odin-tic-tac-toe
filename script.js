@@ -1,12 +1,37 @@
 function GameBoard () {
     const length = 3;
-    const board = Array.from({length}, 
-                  Array.from(({length}), 
-                  () => Cell()));
+    let board = [];
+
+    // Fill board
+    for (let i = 0; i < length; i++) {
+        // Make each row an array
+        board[i] = [];
+
+        // Fill each row with length number Cells
+        for (let j = 0; j < length; j++) {
+            board[i].push(Cell());
+        }
+    }
 
     const getBoard = () => board;
 
-    return {getBoard};
+    const getCell = (row, column) => [row,column];
+
+    const placeChoice = (cell, player) => {
+        board[cell[1]][cell[2]].setValue(player);
+    };
+
+    // Temp function
+    const printBoard = () => {
+        console.log(board.map((row) => row.map((cell) => cell.getValue())));
+    }
+
+    return {
+        getBoard,
+        getCell,
+        placeChoice,
+        printBoard
+    };
 }
 
 function Cell() {
@@ -23,3 +48,6 @@ function Cell() {
         setValue
     };
 }
+
+const game = GameBoard();
+game.printBoard();
