@@ -104,12 +104,13 @@ function capitalizeFirstCharacter (text) {
 const controller = (function GameController() {
     let players = [];
 
-    for (let i = 0; i < 2; i++) {
-        let name = prompt(`What is Player ${i + 1}'s name?`);
-        let mark = i + 1;
+    // TODO
+    // for (let i = 0; i < 2; i++) {
+    //     let name = prompt(`What is Player ${i + 1}'s name?`);
+    //     let mark = i + 1;
 
-        players.push(createPlayer(name, mark));
-    }
+    //     players.push(createPlayer(name, mark));
+    // }
 
     const game = GameBoard();
     const gameBoard = game.getBoard();
@@ -119,23 +120,25 @@ const controller = (function GameController() {
     function playTurn() {  
         let validMove = false;
 
-        while (!validMove) {
-            const choice = getPlayerChoice();
-            validMove = game.placeChoice(choice, activePlayer);
+        // TODO
+        // while (!validMove) {
+        //     const choice = getPlayerChoice();
+        //     validMove = game.placeChoice(choice, activePlayer);
 
-            if (!validMove) {
-                alert("That cell is already taken! Try again.");
-            }
-        }
+        //     if (!validMove) {
+        //         alert("That cell is already taken! Try again.");
+        //     }
+        // }
 
         game.printBoard();
     }
 
-    function getPlayerChoice() {
-        let row = prompt("Row?");
-        let col = prompt("Column?");
-        return [row - 1, col - 1];
-    }
+    // TODO
+    // function getPlayerChoice() {
+    //     let row = prompt("Row?");
+    //     let col = prompt("Column?");
+    //     return [row - 1, col - 1];
+    // }
 
     function declareResults() {
         if (winner) {
