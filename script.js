@@ -92,15 +92,22 @@ function detectWinner(board) {
     return null;
 }
 
+function createPlayer(playerName, playerMark) {
+    return {
+        playerName,
+        playerMark
+    };
+}
+
 const controller = (function GameController() {
     let players = [];
 
     for (let i = 0; i < 2; i++) {
         let name = prompt(`What is Player ${i + 1}'s name?`);
+        let mark = i + 1;
 
-        players.push({
-            name,
-            value: i + 1
-        });
+        players.push(createPlayer(name, mark));
     }
+
+    const getPlayers = () => players;
 })();
