@@ -1,6 +1,6 @@
 function GameBoard () {
     const length = 3;
-    let board = [];
+    const board = [];
 
     // Fill board
     for (let i = 0; i < length; i++) {
@@ -15,11 +15,16 @@ function GameBoard () {
 
     const getBoard = () => board;
 
-    const getCell = (row, column) => [row,column];
-
     const placeChoice = (cell, player) => {
-        board[cell[1]][cell[2]].setValue(player);
+        if (board[cell[0]][cell[1]].getValue()) {
+            return false // Invalid move
+        }
+
+        board[cell[0]][cell[1]].setValue(player.playerMark);
+        return true // Valid move
     };
+
+    const isBoardFull = () => board.every(row => row.every(cell => cell.getValue() !== 0));
 
     // Temp function
     const printBoard = () => {
@@ -28,9 +33,9 @@ function GameBoard () {
 
     return {
         getBoard,
-        getCell,
         placeChoice,
-        printBoard
+        printBoard,
+        isBoardFull
     };
 }
 
@@ -49,17 +54,10 @@ function Cell() {
     };
 }
 
-function playRound() {
-    let activePlayer = activePlater === players[0] ? players[1] : players[0];
-
-    const game = GameBoard();
-    game.printBoard();
-}
-
 function detectWinner(board) {
-    let boardLength = board[0].length;
-    let diagLeft = [];
-    let diagRight = [];
+    const boardLength = board[0].length;
+    const diagLeft = [];
+    const diagRight = [];
 
     // Loop through all rows
     for (let i = 0; i < boardLength; i++) {
@@ -80,11 +78,11 @@ function detectWinner(board) {
     }
 
     // Check if somebody has won diagonally
-    if (diagLeft.every(cell => cell === diagLeft[0])) {
+    if (diagLeft[0] !== 0 && diagLeft.every(cell => cell === diagLeft[0])) {
         return diagLeft[0];
     }
 
-    if (diagRight.every(cell => cell === diagRight[0])) {
+    if (diagRight[0] !== 0 && diagRight.every(cell => cell === diagRight[0])) {
         return diagRight[0];
     }
 
@@ -99,6 +97,10 @@ function createPlayer(playerName, playerMark) {
     };
 }
 
+function capitalizeFirstCharacter (text) {
+    return text[0].toUpperCase() + text.slice(1, text.length);
+}
+
 const controller = (function GameController() {
     let players = [];
 
@@ -109,5 +111,52 @@ const controller = (function GameController() {
         players.push(createPlayer(name, mark));
     }
 
-    const getPlayers = () => players;
+    const game = GameBoard();
+    const gameBoard = game.getBoard();
+    let activePlayer = players[0];
+    let winner = false;
+
+    function playTurn() {  
+        let validMove = false;
+
+        while (!validMove) {
+            const choice = getPlayerChoice();
+            validMove = game.placeChoice(choice, activePlayer);
+
+            if (!validMove) {
+                alert("That cell is already taken! Try again.");
+            }
+        }
+
+        game.printBoard();
+    }
+
+    function getPlayerChoice() {
+        let row = prompt("Row?");
+        let col = prompt("Column?");
+        return [row - 1, col - 1];
+    }
+
+    function declareResults() {
+        if (winner) {
+            console.log(`${capitalizeFirstCharacter(winner.playerName)}, Wins!`);
+            return;
+        }
+
+        console.log(`Tie! Nobody Wins!`);
+    }
+
+    // Initial board print
+    game.printBoard();
+
+    while(!winner && !game.isBoardFull()) {
+        playTurn();
+        winner = players.find(p => p.playerMark === detectWinner(gameBoard));
+
+        if (!winner) {
+            activePlayer = activePlayer === players[0] ? players[1] : players[0];
+        }
+    }
+
+    declareResults();
 })();
