@@ -101,65 +101,65 @@ function capitalizeFirstCharacter (text) {
     return text[0].toUpperCase() + text.slice(1, text.length);
 }
 
-const controller = (function GameController() {
-    let players = [];
+// const controller = (function GameController() {
+//     let players = [];
 
-    // TODO
-    // for (let i = 0; i < 2; i++) {
-    //     let name = prompt(`What is Player ${i + 1}'s name?`);
-    //     let mark = i + 1;
+//     // TODO
+//     // for (let i = 0; i < 2; i++) {
+//     //     let name = prompt(`What is Player ${i + 1}'s name?`);
+//     //     let mark = i + 1;
 
-    //     players.push(createPlayer(name, mark));
-    // }
+//     //     players.push(createPlayer(name, mark));
+//     // }
 
-    const game = GameBoard();
-    const gameBoard = game.getBoard();
-    let activePlayer = players[0];
-    let winner = false;
+//     const game = GameBoard();
+//     const gameBoard = game.getBoard();
+//     let activePlayer = players[0];
+//     let winner = false;
 
-    function playTurn() {  
-        let validMove = false;
+//     function playTurn() {  
+//         let validMove = false;
 
-        // TODO
-        // while (!validMove) {
-        //     const choice = getPlayerChoice();
-        //     validMove = game.placeChoice(choice, activePlayer);
+//         // TODO
+//         // while (!validMove) {
+//         //     const choice = getPlayerChoice();
+//         //     validMove = game.placeChoice(choice, activePlayer);
 
-        //     if (!validMove) {
-        //         alert("That cell is already taken! Try again.");
-        //     }
-        // }
+//         //     if (!validMove) {
+//         //         alert("That cell is already taken! Try again.");
+//         //     }
+//         // }
 
-        game.printBoard();
-    }
+//         game.printBoard();
+//     }
 
-    // TODO
-    // function getPlayerChoice() {
-    //     let row = prompt("Row?");
-    //     let col = prompt("Column?");
-    //     return [row - 1, col - 1];
-    // }
+//     // TODO
+//     // function getPlayerChoice() {
+//     //     let row = prompt("Row?");
+//     //     let col = prompt("Column?");
+//     //     return [row - 1, col - 1];
+//     // }
 
-    function declareResults() {
-        if (winner) {
-            console.log(`${capitalizeFirstCharacter(winner.playerName)}, Wins!`);
-            return;
-        }
+//     function declareResults() {
+//         if (winner) {
+//             console.log(`${capitalizeFirstCharacter(winner.playerName)}, Wins!`);
+//             return;
+//         }
 
-        console.log(`Tie! Nobody Wins!`);
-    }
+//         console.log(`Tie! Nobody Wins!`);
+//     }
 
-    // Initial board print
-    game.printBoard();
+//     // Initial board print
+//     game.printBoard();
 
-    while(!winner && !game.isBoardFull()) {
-        playTurn();
-        winner = players.find(p => p.playerMark === detectWinner(gameBoard));
+//     while(!winner && !game.isBoardFull()) {
+//         playTurn();
+//         winner = players.find(p => p.playerMark === detectWinner(gameBoard));
 
-        if (!winner) {
-            activePlayer = activePlayer === players[0] ? players[1] : players[0];
-        }
-    }
+//         if (!winner) {
+//             activePlayer = activePlayer === players[0] ? players[1] : players[0];
+//         }
+//     }
 
-    declareResults();
-})();
+//     declareResults();
+// })();
