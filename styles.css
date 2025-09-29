@@ -26,6 +26,10 @@
 
 /* BACKGROUND */
 
+body {
+    overflow-x: hidden;
+}
+
 .game-container {
     background-color: var(--background);
 
@@ -47,14 +51,16 @@
     display: flex;
     align-items: center;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: center;
 
     width: 70vw;
     max-width: 100%;  
-    gap: 2em;
     height: fit-content;
 
-    padding: 2em;
+    padding: 2w;
+    gap: 2em;  
+
+    flex-wrap: wrap; 
 }
 
 .turn-indicator {
@@ -128,16 +134,21 @@
     width: auto;
 }
 
+.header > img {
+    display: block;
+}
+
 .turn-indicator > img,
 .icon  {
     height: clamp(2em, 30vw, 5em);
+    width: auto;
 }
 
 /* MEDIA QUERIES */
 @media (max-width: 700px) {
     .header {
         flex-direction: column;
-        align-items: stretch;
+        align-items: center;
         text-align: center;
     }
 
