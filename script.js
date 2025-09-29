@@ -67,12 +67,13 @@ function detectWinner(board) {
         diagLeft.push(board[i][i].getValue());
         diagRight.push(board[i][boardLength - 1 - i].getValue());
 
-        // If the first cell of the row is not zero, check if the row/column is the same
+        // If the first cell of the row is not zero, check if the row/column is the same == winner
         if (cellOne) {
-            if (board[i].every(cell => cell.getValue() === cellOne) ||
-                board.every(row => row[i].getValue() === cellOne)
+            if (board[i].every(cell => cell.getValue() === cellOne) // Checks row
+                ||
+                board.every(row => row[i].getValue() === cellOne) // Checks column
             ) {
-                return cellOne;
+                return cellOne; // Winning mark
             }
         }
     }
