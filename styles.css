@@ -11,15 +11,16 @@
 :root {
     --background: #111111;
     --grid-items: #d9d7d7;
-    --shadow: #4d4d4d;
+    --shadow: #303030;
+    --turn-indicator: #a3a3a3;
 
-    --playerO: #249ebf;
-    --playerOShadow: #1e4482;
-    --playerX: #dd2427;
-    --playerXShadow: #691112;
+    --playerX: #249ebf;
+    --playerXShadow: #1e4482;
+    --playerO: #dd2427;
+    --playerOShadow: #691112;
 
     --grayText: #f2f2f2;
-    --gray-text-shadow: #5b6366;
+    --gray-text-shadow: #696969;
 }
 
 /* BACKGROUND */
@@ -30,6 +31,51 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
 
     padding: 2em;
+
+    min-height: 100vh;
+    min-width: 100vw;
+}
+
+/* HEADER */
+
+.header {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
+
+    width: 70%;
+    height: fit-content;
+}
+
+.turn-indicator {
+    background-color: var(--gray-text-shadow);
+    padding: 0.5em;
+    padding-right: 1.5em;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 1.5em;
+
+    color: var(--playerX);
+    text-shadow: 0 0 0.1em var(--playerXShadow);
+
+    box-shadow: 0 0 0.5em var(--shadow);
+}
+
+/* IMGS */
+
+.non-game-mark,
+.icon {
+    height: 7em;
+    width: auto;
+}
+
+.turn-indicator > img {
+    height: 5em;
 }
