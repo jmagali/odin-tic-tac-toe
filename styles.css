@@ -21,3 +21,15 @@
     --grayText: #f2f2f2;
     --gray-text-shadow: #5b6366;
 }
+
+/* BACKGROUND */
+
+.game-container {
+    background-color: var(--background);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 2em;
+}
