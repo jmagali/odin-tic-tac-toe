@@ -91,9 +91,8 @@ function detectWinner(board) {
     return null;
 }
 
-function createPlayer(playerName, playerMark) {
+function createPlayer(playerMark) {
     return {
-        playerName,
         playerMark
     };
 }
@@ -107,10 +106,9 @@ function capitalizeFirstCharacter (text) {
 
 //     // TODO
 //     // for (let i = 0; i < 2; i++) {
-//     //     let name = prompt(`What is Player ${i + 1}'s name?`);
 //     //     let mark = i + 1;
 
-//     //     players.push(createPlayer(name, mark));
+//     //     players.push(createPlayer(mark));
 //     // }
 
 //     const game = GameBoard();
@@ -141,6 +139,7 @@ function capitalizeFirstCharacter (text) {
 //     //     return [row - 1, col - 1];
 //     // }
 
+//     // TODO
 //     function declareResults() {
 //         if (winner) {
 //             console.log(`${capitalizeFirstCharacter(winner.playerName)}, Wins!`);
