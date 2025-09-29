@@ -101,7 +101,21 @@ function capitalizeFirstCharacter (text) {
     return text[0].toUpperCase() + text.slice(1, text.length);
 }
 
-// const controller = (function GameController() {
+const controller = (function GameController() {
+
+    const board = GameBoard().getBoard();
+    const grid = document.getElementById("grid-container");
+
+    (function displayBoard () {
+        for (let i = 0; i < board.length; i++) {
+            for (let k = 0; k < board[i].length; k++) {
+                const item = document.createElement("div");
+                item.classList.add("grid-item");
+                item.id = `${i}-${k}`;
+                grid.appendChild(item);
+            }
+        }
+    })();
 //     let players = [];
 
 //     // TODO
@@ -162,4 +176,4 @@ function capitalizeFirstCharacter (text) {
 //     }
 
 //     declareResults();
-// })();
+})();
