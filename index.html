@@ -11,7 +11,7 @@
 <body>
     <div class="game-container">
         <div class="header">
-            <img src="./assets/Logo.png" alt="Red and Blue Game Logo">
+            <img src="./assets/logo.svg" alt="Red and Blue Game Logo">
 
             <div class="turn-indicator">
                 <h1>TURN</h1>
@@ -20,6 +20,31 @@
             <button type="button" id="restart">
                 <img src="./assets/refresh.png" alt="Restart Arrow">
             </button>
+        </div>
+
+        <div id="grid-container"></div>
+
+        <div class="score-container">
+            <div class="score" id="playerX">
+                <div class="score-text">
+                    <img src="./assets/gray-x.svg" alt="Gray X Player Mark">
+                    <h1>WINS</h1>
+                    <h2>0</h2>
+                </div>
+            </div>
+            <div class="score" id="tie">
+                <div class="score-text">
+                    <h1>TIES</h1>
+                    <h2>0</h2>
+                </div>
+            </div>
+            <div class="score" id="playerO">
+                 <div class="score-text">
+                    <img src="./assets/gray-o.svg" alt="Gray O Player Mark">
+                    <h1>WINS</h1>
+                    <h2>0</h2>
+                </div>
+            </div>
         </div>
     </div>
 </body>
