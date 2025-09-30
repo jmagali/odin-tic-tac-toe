@@ -107,28 +107,24 @@ const controller = (function GameController() {
     const grid = document.getElementById("grid-container");
 
     (function displayBoard () {
-        for (let i = 0; i < board.length; i++) {
-            for (let k = 0; k < board[i].length; k++) {
-                const item = document.createElement("div");
-                item.classList.add("grid-item");
-                item.id = `${i}-${k}`;
-                grid.appendChild(item);
-            }
+        for (let i = 0; i < board.length * board.length; i++) {
+            const item = document.createElement("div");
+            item.classList.add("grid-item");
+            item.id = `${i}`;
+            grid.appendChild(item);
         }
     })();
-//     let players = [];
 
-//     // TODO
-//     // for (let i = 0; i < 2; i++) {
-//     //     let mark = i + 1;
+    let players = [];
 
-//     //     players.push(createPlayer(mark));
-//     // }
+    for (let i = 0; i < 2; i++) {
+        let mark = i + 1;
 
-//     const game = GameBoard();
-//     const gameBoard = game.getBoard();
-//     let activePlayer = players[0];
-//     let winner = false;
+        players.push(createPlayer(mark));
+    }
+
+    let activePlayer = players[0];
+    let winner = false;
 
 //     function playTurn() {  
 //         let validMove = false;
