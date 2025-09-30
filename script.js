@@ -111,13 +111,14 @@ const controller = (function GameController() {
             for (let k = 0; k < board[i].length; k++) {
                 const item = document.createElement("div");
                 item.classList.add("grid-item");
-                item.classList.add("empty")
+                item.classList.add("empty");
+                item.classList.add("emptyHollow")
                 item.id = `${i} ${k}`;
                 grid.appendChild(item);
 
                 item.addEventListener('mouseover', () => {
-                    if (item.classList.contains("empty")) {
-                        item.classList.remove("empty");
+                    if (item.classList.contains("emptyHollow")) {
+                        item.classList.remove("emptyHollow");
                         const hollowMark = document.createElement("img");
                         hollowMark.classList.add("non-game-mark");
                         hollowMark.id = `Mark ${i} ${k}`;
@@ -128,7 +129,7 @@ const controller = (function GameController() {
                         }
                         else {
                             hollowMark.classList.add("non-game-mark");
-                            hollowMark.src = "./assets/hollowO.svg"
+                            hollowMark.src = "./assets/hollowO.svg";
                             hollowMark.alt = "Hollow Red O Mark";
                         }
 
@@ -140,12 +141,34 @@ const controller = (function GameController() {
                     const hollowMark = document.getElementById(`Mark ${i} ${k}`);
                         if (hollowMark) {
                             item.removeChild(hollowMark);
-                            item.classList.add("empty");
+                            item.classList.add("emptyHollow");
                         }
                 });
 
                 item.addEventListener('click', () => {
+                    if (item.classList.contains("empty")) {
+                        item.classList.remove("empty");
+                        const hollowMark = document.getElementById(`Mark ${i} ${k}`);
+                        item.removeChild(hollowMark);
 
+                        const mark = document.createElement("img");
+                        mark.classList.add("non-game-mark");
+
+                        if (activePlayer == players[0]) {
+                            mark.src="./assets/blue-x.svg";
+                            mark.alt = "Solid Blue X Mark";
+                            item.style.backgroundColor = '#0a7c9cff';
+                        }
+                        else {
+                            mark.src="./assets/red-o.svg";
+                            mark.alt = "Solid Red O Mark";
+                            item.style.backgroundColor = '#c3080bff';
+                        }
+
+                        item.appendChild(mark);
+
+                        playTurn(item);
+                    }
                 });
             }
         }
@@ -162,8 +185,15 @@ const controller = (function GameController() {
     let activePlayer = players[0];
     let winner = false;
 
-    function playTurn() { 
+    function playTurn(element) { 
+        // Get row and column from id (split by space)
+        const [row, col] = element.id.split(" ").map(Number);
 
+        board[row][col].setValue(activePlayer.playerMark);
+
+        let winner = detectWinner(board)
+
+        if (!winner) activePlayer = activePlayer === players[0] ? players[1] : players[0];
     }
 
 //     // TODO
