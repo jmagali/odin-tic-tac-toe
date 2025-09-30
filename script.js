@@ -110,8 +110,38 @@ const controller = (function GameController() {
         for (let i = 0; i < board.length * board.length; i++) {
             const item = document.createElement("div");
             item.classList.add("grid-item");
+            item.classList.add("empty")
             item.id = `${i}`;
             grid.appendChild(item);
+
+            item.addEventListener('mouseover', () => {
+                if (item.classList.contains("empty")) {
+                    item.classList.remove("empty");
+                    const hollowMark = document.createElement("img");
+                    hollowMark.classList.add("non-game-mark");
+                    hollowMark.id = `Mark ${i}`;
+
+                    if (activePlayer == players[0]) {
+                        hollowMark.src = "./assets/hollowX.svg"
+                        hollowMark.alt = "Hollow Blue X Mark";
+                    }
+                    else {
+                        hollowMark.classList.add("non-game-mark");
+                        hollowMark.src = "./assets/hollowO.svg"
+                        hollowMark.alt = "Hollow Red O Mark";
+                    }
+
+                    item.appendChild(hollowMark);
+                }
+            });
+
+            item.addEventListener(`mouseleave`, () => {
+                const hollowMark = document.getElementById(`Mark ${i}`);
+                    if (hollowMark) {
+                        item.removeChild(hollowMark);
+                        item.classList.add("empty");
+                    }
+            });
         }
     })();
 
@@ -126,28 +156,15 @@ const controller = (function GameController() {
     let activePlayer = players[0];
     let winner = false;
 
-//     function playTurn() {  
-//         let validMove = false;
+    function playTurn() {  
+        let validMove = false;
 
-//         // TODO
-//         // while (!validMove) {
-//         //     const choice = getPlayerChoice();
-//         //     validMove = game.placeChoice(choice, activePlayer);
+        while (!validMove) {
+            
+        }
 
-//         //     if (!validMove) {
-//         //         alert("That cell is already taken! Try again.");
-//         //     }
-//         // }
-
-//         game.printBoard();
-//     }
-
-//     // TODO
-//     // function getPlayerChoice() {
-//     //     let row = prompt("Row?");
-//     //     let col = prompt("Column?");
-//     //     return [row - 1, col - 1];
-//     // }
+        game.printBoard();
+    }
 
 //     // TODO
 //     function declareResults() {
