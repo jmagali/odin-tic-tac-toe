@@ -283,3 +283,13 @@ body, html {
         width: 100%;
     }
 }
+
+/* Z-Indexes */
+
+.modal-background {
+    z-index: 999;
+}
+
+.modal {
+    z-index: 1000;
+}
