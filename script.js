@@ -54,7 +54,7 @@ function Cell() {
     };
 }
 
-function detectWinner(board) {
+function detectWinner(board, boardObj) {
     const boardLength = board[0].length;
     const diagLeft = [];
     const diagRight = [];
@@ -88,6 +88,10 @@ function detectWinner(board) {
     }
 
     // In the case of no winner
+    if (boardObj.isBoardFull()) {
+        return 3; // tie
+    }
+    
     return null;
 }
 
@@ -103,7 +107,8 @@ function capitalizeFirstCharacter (text) {
 
 const controller = (function GameController() {
 
-    const board = GameBoard().getBoard();
+    const gameBoard = GameBoard();
+    const board = gameBoard.getBoard();
     const grid = document.getElementById("grid-container");
 
     (function displayBoard () {
@@ -183,7 +188,8 @@ const controller = (function GameController() {
     }
 
     let activePlayer = players[0];
-    let winner = false;
+    let winner;
+    let xWins = 0, ties = 0, oWins = 0;
 
     function playTurn(element) { 
         // Get row and column from id (split by space)
@@ -191,9 +197,28 @@ const controller = (function GameController() {
 
         board[row][col].setValue(activePlayer.playerMark);
 
-        let winner = detectWinner(board)
+        winner = detectWinner(board, gameBoard);
 
         if (!winner) activePlayer = activePlayer === players[0] ? players[1] : players[0];
+        else {
+            let scoreText;
+
+            if(winner == players[0].playerMark) {
+                scoreText = document.getElementById("playerXText");
+                xWins++;
+                scoreText.textContent = xWins;
+            }
+            else if (winner == players[1].playerMark) {
+                scoreText = document.getElementById("playerOText");
+                oWins++;
+                scoreText.textContent = oWins;
+            }
+            else {
+                scoreText = document.getElementById("tieText");
+                ties++;
+                scoreText.textContent = ties;
+            }
+        }
     }
 
 //     // TODO
