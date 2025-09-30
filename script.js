@@ -107,41 +107,47 @@ const controller = (function GameController() {
     const grid = document.getElementById("grid-container");
 
     (function displayBoard () {
-        for (let i = 0; i < board.length * board.length; i++) {
-            const item = document.createElement("div");
-            item.classList.add("grid-item");
-            item.classList.add("empty")
-            item.id = `${i}`;
-            grid.appendChild(item);
+        for (let i = 0; i < board.length; i++) {
+            for (let k = 0; k < board[i].length; k++) {
+                const item = document.createElement("div");
+                item.classList.add("grid-item");
+                item.classList.add("empty")
+                item.id = `${i} ${k}`;
+                grid.appendChild(item);
 
-            item.addEventListener('mouseover', () => {
-                if (item.classList.contains("empty")) {
-                    item.classList.remove("empty");
-                    const hollowMark = document.createElement("img");
-                    hollowMark.classList.add("non-game-mark");
-                    hollowMark.id = `Mark ${i}`;
-
-                    if (activePlayer == players[0]) {
-                        hollowMark.src = "./assets/hollowX.svg"
-                        hollowMark.alt = "Hollow Blue X Mark";
-                    }
-                    else {
+                item.addEventListener('mouseover', () => {
+                    if (item.classList.contains("empty")) {
+                        item.classList.remove("empty");
+                        const hollowMark = document.createElement("img");
                         hollowMark.classList.add("non-game-mark");
-                        hollowMark.src = "./assets/hollowO.svg"
-                        hollowMark.alt = "Hollow Red O Mark";
-                    }
+                        hollowMark.id = `Mark ${i} ${k}`;
 
-                    item.appendChild(hollowMark);
-                }
-            });
+                        if (activePlayer == players[0]) {
+                            hollowMark.src = "./assets/hollowX.svg"
+                            hollowMark.alt = "Hollow Blue X Mark";
+                        }
+                        else {
+                            hollowMark.classList.add("non-game-mark");
+                            hollowMark.src = "./assets/hollowO.svg"
+                            hollowMark.alt = "Hollow Red O Mark";
+                        }
 
-            item.addEventListener(`mouseleave`, () => {
-                const hollowMark = document.getElementById(`Mark ${i}`);
-                    if (hollowMark) {
-                        item.removeChild(hollowMark);
-                        item.classList.add("empty");
+                        item.appendChild(hollowMark);
                     }
-            });
+                });
+
+                item.addEventListener(`mouseleave`, () => {
+                    const hollowMark = document.getElementById(`Mark ${i} ${k}`);
+                        if (hollowMark) {
+                            item.removeChild(hollowMark);
+                            item.classList.add("empty");
+                        }
+                });
+
+                item.addEventListener('click', () => {
+
+                });
+            }
         }
     })();
 
@@ -156,14 +162,8 @@ const controller = (function GameController() {
     let activePlayer = players[0];
     let winner = false;
 
-    function playTurn() {  
-        let validMove = false;
+    function playTurn() { 
 
-        while (!validMove) {
-            
-        }
-
-        game.printBoard();
     }
 
 //     // TODO
