@@ -20,6 +20,8 @@
     --playerXShadow: #1e4482;
     --playerO: #dd2427;
     --playerOShadow: #691112;
+    --tie: #FFD966;
+    --tieShadow: #5e4600;
 
     --grayText: #f2f2f2;
     --gray-text-shadow: #696969;
@@ -28,8 +30,10 @@
 
 /* BACKGROUND */
 
-body {
+body, html {
     overflow-x: hidden;
+    height: 100%;
+    background-color: var(--background);
 }
 
 .game-container {
@@ -44,6 +48,7 @@ body {
     gap: 2em;
 
     min-height: 100vh;
+    height: auto;
     min-width: 100vw;
 }
 
@@ -148,6 +153,62 @@ body {
     box-shadow: inset 0 0 1.2em var(--background);
 }
 
+/* SCORE INDICATOR */
+
+.score-container {
+    width: 70vw;
+    height: auto;
+
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+    gap: 2em;
+
+    flex-wrap: wrap;
+}
+
+.score {
+    width: 30vw;
+    min-height: auto;
+    padding: 1em;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    border-radius: 1.5em;
+
+    color: var(--grayText);
+    text-shadow: 0 0 0.2em var(--background);
+}
+
+.score > h2 {
+    font-size: calc(2em + 2vw);
+}
+
+.score-text {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#playerX {
+    background-color: var(--playerX);
+    box-shadow: inset 0 0 0.5em var(--playerXShadow);
+}
+
+#playerO {
+    background-color: var(--playerO);
+    box-shadow: inset 0 0 0.5em var(--playerOShadow);
+}
+
+#tie {
+    background-color: var(--tie);
+    box-shadow: inset 0 0 0.5em var(--tieShadow);
+    flex-shrink: 0;
+}
+
 /* IMGS */
 
 .non-game-mark {
@@ -166,11 +227,18 @@ body {
 }
 
 /* MEDIA QUERIES */
-@media (max-width: 700px) {
-    .header {
+@media (max-width: 800px) {
+    .header,
+    .score-container,
+    .score-text {
         flex-direction: column;
         align-items: center;
         text-align: center;
+    }
+
+    .score-container {
+        justify-content: stretch;
+        width: 80vw;
     }
 
     #grid-container {
@@ -180,6 +248,11 @@ body {
         gap: 1em;
 
         margin: 0 auto;  
+    }
+
+    .score {
+        width: 100%;
+        font-size: 1.2em;
     }
 
     .game-container {
