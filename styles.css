@@ -23,6 +23,11 @@
     --tie: #FFD966;
     --tieShadow: #5e4600;
 
+    --buttonHover: #dfb945;
+    --buttonShadowHover: #604701;
+    --buttonActive: #d0ac40;
+    --buttonShadowActive: #4e3901;
+
     --grayText: #f2f2f2;
     --gray-text-shadow: #696969;
     --gray-text-shadow-dark: #494949;
@@ -170,7 +175,7 @@ body, html {
 /* SCORE INDICATOR */
 
 .score-container {
-    width: 70vw;
+    width: 90vw;
     height: auto;
 
     display: flex;
@@ -182,8 +187,8 @@ body, html {
 }
 
 .score {
-    width: 30vw;
-    min-height: auto;
+    width: 22vw;
+    height: auto;
     padding: 1em;
 
     display: flex;
@@ -282,6 +287,106 @@ body, html {
     .turn-indicator, #restart {
         width: 100%;
     }
+
+    .modal > div > h1 {
+        font-size: calc(80vw + 1em);
+    }
+}
+
+@media (max-width: 1200px) {
+    .modal {
+        height: 30vw;
+    }
+}
+
+/* MODALS */
+
+.modal-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    
+    background-color: rgba(0, 0, 0, 0.4);
+    width: 100%;
+    height: 100%;
+
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    pointer-events: none;
+    transition: opacity 0.2s ease-in-out;
+
+    overflow-y: auto;
+    padding: 2em;
+
+    opacity: 100;
+}
+
+.modal {
+    background-color: var(--grayText);
+    padding: 1em;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+
+    border-radius: 1em;
+    width: 80vw;
+    height: 50vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    pointer-events: auto;
+
+    flex-direction: column;
+    box-shadow: inset 0 0 1em var(--background),
+                0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.modal > button {
+    background-color: var(--tie);
+    box-shadow: inset 0 0 0.5em var(--tieShadow),
+                0 0 0.5em rgba(0, 0, 0, 0.5);
+    border-radius: 1em;
+    padding: 1em;
+    border: none;
+
+    width: 30vw;
+    height: auto;
+
+    font-size: calc(0.5vw + 1em);
+
+
+    transition: transform 0.2s ease-in-out,
+            translateY 0.2s ease-in-out,
+            background-color 0.2s ease-in-out;
+}
+
+.modal button:hover {
+    background-color: var(--buttonHover);
+    box-shadow: inset 0 0 0.5em var(--buttonShadowHover),
+                0 0 0.5em rgba(0, 0, 0, 0.5);
+    transform: scale(0.99);
+}
+
+.modal button:active {
+    background-color: var(--buttonActive);
+    box-shadow: inset 0 0 0.5em var(--buttonShadowActive),
+                0 0 0.5em rgba(0, 0, 0, 0.5);
+    transform: scale(0.97) translateY(0.2em);
+}
+
+.modal > div > h1 {
+    font-size: calc(4vw + 1em);
+}
+.hidden {
+    opacity: 0;
+    pointer-events: none;
 }
 
 /* Z-Indexes */
