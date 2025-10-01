@@ -23,6 +23,16 @@
     --tie: #FFD966;
     --tieShadow: #5e4600;
 
+    --noHover: #be1e21;
+    --noShadowHover: #580f10;
+    --noActive: #a5191b;
+    --noShadowActive: #3d0a0b;
+
+    --yesHover: #1f87a3;
+    --yesActive: #2186a1;
+    --yesShadowHover: #193768;
+    --yesShadowActive: #122749;
+
     --buttonHover: #dfb945;
     --buttonShadowHover: #604701;
     --buttonActive: #d0ac40;
@@ -316,7 +326,7 @@ body, html {
     align-items: center;
     justify-content: center;
 
-    pointer-events: none;
+    pointer-events: auto;
     transition: opacity 0.2s ease-in-out;
 
     overflow-y: auto;
@@ -367,14 +377,14 @@ body, html {
             background-color 0.2s ease-in-out;
 }
 
-.modal button:hover {
+.modal > button:hover {
     background-color: var(--buttonHover);
     box-shadow: inset 0 0 0.5em var(--buttonShadowHover),
                 0 0 0.5em rgba(0, 0, 0, 0.5);
     transform: scale(0.99);
 }
 
-.modal button:active {
+.modal  > button:active {
     background-color: var(--buttonActive);
     box-shadow: inset 0 0 0.5em var(--buttonShadowActive),
                 0 0 0.5em rgba(0, 0, 0, 0.5);
@@ -384,6 +394,78 @@ body, html {
 .modal > div > h1 {
     font-size: calc(4vw + 1em);
 }
+
+.modal > h1 {
+    justify-self: center;
+    text-align: center;
+
+    font-size: calc(1vw + 2em);
+}
+
+.modal .button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 70%;
+    gap: 5%;
+}
+
+.modal .button-container button {
+    border-radius: 1em;
+    padding: 1em;
+    border: none;
+
+    width: 20vw;
+    height: auto;
+
+    font-size: calc(1vw + 1em);
+
+    transition: transform 0.2s ease-in-out,
+            translateY 0.2s ease-in-out,
+            background-color 0.2s ease-in-out;
+}
+
+#no {
+    background-color: var(--playerO);
+    box-shadow: inset 0 0 0.5em var(--playerOShadow),
+                0 0 0.5em rgba(0, 0, 0, 0.5);
+}
+
+#yes {
+    background-color: var(--playerX);
+    box-shadow: inset 0 0 0.5em var(--playerXShadow),
+                0 0 0.5em rgba(0, 0, 0, 0.5);
+}
+
+#no:hover {
+    background-color: var(--noHover);
+    box-shadow: inset 0 0 0.5em var(--noShadowHover),
+                0 0 0.5em rgba(0, 0, 0, 0.5);
+    transform: scale(0.99);
+}
+
+#no:active {
+    background-color: var(--noActive);
+    box-shadow: inset 0 0 0.5em var(--noShadowActive),
+                0 0 0.5em rgba(0, 0, 0, 0.5);
+    transform: scale(0.97) translateY(0.2em);
+}
+
+#yes:hover {
+    background-color: var(--yesHover);
+    box-shadow: inset 0 0 0.5em var(--yesShadowHover),
+                0 0 0.5em rgba(0, 0, 0, 0.5);
+    transform: scale(0.99);
+}
+
+#yes:active {
+    background-color: var(--yesActive);
+    box-shadow: inset 0 0 0.5em var(--yesShadowActive),
+                0 0 0.5em rgba(0, 0, 0, 0.5);
+    transform: scale(0.97) translateY(0.2em);
+}
+
 .hidden {
     opacity: 0;
     pointer-events: none;
