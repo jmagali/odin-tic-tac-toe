@@ -179,6 +179,36 @@ const controller = (function GameController() {
         }
     })();
 
+    (function modalHandling () {
+        const modalBackground = document.getElementById("modal-background");
+        const resultsModal = document.getElementById("results");
+        const restartConfirmModal = document.getElementById("restartConfirm");
+        const restartButton = document.getElementById("restart");
+        const noButton = document.getElementById("no");
+        const yesButton = document.getElementById("yes");
+
+        function closeModals() {
+            restartConfirmModal.classList.add("hidden");
+            modalBackground.classList.add("hidden");
+            resultsModal.classList.add("hidden");
+        }
+
+        restartButton.addEventListener("click", () => {
+            modalBackground.classList.remove("hidden");
+            restartConfirmModal.classList.remove("hidden");
+        });
+
+        restartConfirmModal.addEventListener("click", (e) => {
+            e.stopPropagation();
+        });
+
+        modalBackground.addEventListener("click", closeModals);
+
+        noButton.addEventListener("click", closeModals);
+
+        yesButton.addEventListener("click", closeModals);
+    })();
+
     let players = [];
 
     for (let i = 0; i < 2; i++) {
