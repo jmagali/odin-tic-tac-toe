@@ -471,6 +471,14 @@ body, html {
     pointer-events: none;
 }
 
+#winner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    gap: 1em;
+}
+
 /* Z-Indexes */
 
 .modal-background {

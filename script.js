@@ -179,35 +179,40 @@ const controller = (function GameController() {
         }
     })();
 
-    (function modalHandling () {
-        const modalBackground = document.getElementById("modal-background");
-        const resultsModal = document.getElementById("results");
-        const restartConfirmModal = document.getElementById("restartConfirm");
-        const restartButton = document.getElementById("restart");
-        const noButton = document.getElementById("no");
-        const yesButton = document.getElementById("yes");
+    const modalBackground = document.getElementById("modal-background");
+    const resultsModal = document.getElementById("results");
+    const restartConfirmModal = document.getElementById("restartConfirm");
+    const restartButton = document.getElementById("restart");
+    const noButton = document.getElementById("no");
+    const yesButton = document.getElementById("yes");
+    const playAgainButton = document.getElementById("playAgain");
 
-        function closeModals() {
-            restartConfirmModal.classList.add("hidden");
-            modalBackground.classList.add("hidden");
-            resultsModal.classList.add("hidden");
-        }
+    function closeModals() {
+        restartConfirmModal.classList.add("hidden");
+        modalBackground.classList.add("hidden");
+        resultsModal.classList.add("hidden");
+    }
 
-        restartButton.addEventListener("click", () => {
-            modalBackground.classList.remove("hidden");
-            restartConfirmModal.classList.remove("hidden");
-        });
+    restartButton.addEventListener("click", () => {
+        modalBackground.classList.remove("hidden");
+        restartConfirmModal.classList.remove("hidden");
+    });
 
-        restartConfirmModal.addEventListener("click", (e) => {
-            e.stopPropagation();
-        });
+    restartConfirmModal.addEventListener("click", (e) => {
+        e.stopPropagation();
+    });
 
-        modalBackground.addEventListener("click", closeModals);
+    resultsModal.addEventListener("click", (e) => {
+        e.stopPropagation();
+    });
 
-        noButton.addEventListener("click", closeModals);
-
-        yesButton.addEventListener("click", closeModals);
-    })();
+    modalBackground.addEventListener("click", closeModals);
+    noButton.addEventListener("click", closeModals);
+    yesButton.addEventListener("click", closeModals);
+    playAgainButton.addEventListener("click", () => {
+        closeModals();
+        resultsModal.firstElementChild.removeChild(resultsModal.firstElementChild.firstElementChild);
+    });
 
     let players = [];
 
@@ -221,6 +226,8 @@ const controller = (function GameController() {
     let winner;
     let xWins = 0, ties = 0, oWins = 0;
 
+    const winnerText = document.getElementById("winner");
+
     function playTurn(element) { 
         // Get row and column from id (split by space)
         const [row, col] = element.id.split(" ").map(Number);
@@ -232,46 +239,34 @@ const controller = (function GameController() {
         if (!winner) activePlayer = activePlayer === players[0] ? players[1] : players[0];
         else {
             let scoreText;
+            const winningMark = document.createElement("img");
+            winningMark.classList.add("icon");
 
             if(winner == players[0].playerMark) {
                 scoreText = document.getElementById("playerXText");
                 xWins++;
                 scoreText.textContent = xWins;
+                winnerText.firstElementChild.textContent = "WINS"
+                winningMark.src = "./assets/blue-x.svg";
+                resultsModal.firstElementChild.prepend(winningMark);
             }
             else if (winner == players[1].playerMark) {
                 scoreText = document.getElementById("playerOText");
                 oWins++;
                 scoreText.textContent = oWins;
-            }
+                winnerText.firstElementChild.textContent = "WINS"
+                winningMark.src = "./assets/red-o.svg";
+                resultsModal.firstElementChild.prepend(winningMark);
+            }   
             else {
                 scoreText = document.getElementById("tieText");
                 ties++;
                 scoreText.textContent = ties;
+                winnerText.firstElementChild.textContent = "TIE"
             }
+
+            modalBackground.classList.remove("hidden");
+            resultsModal.classList.remove("hidden");
         }
     }
-
-//     // TODO
-//     function declareResults() {
-//         if (winner) {
-//             console.log(`${capitalizeFirstCharacter(winner.playerName)}, Wins!`);
-//             return;
-//         }
-
-//         console.log(`Tie! Nobody Wins!`);
-//     }
-
-//     // Initial board print
-//     game.printBoard();
-
-//     while(!winner && !game.isBoardFull()) {
-//         playTurn();
-//         winner = players.find(p => p.playerMark === detectWinner(gameBoard));
-
-//         if (!winner) {
-//             activePlayer = activePlayer === players[0] ? players[1] : players[0];
-//         }
-//     }
-
-//     declareResults();
 })();
