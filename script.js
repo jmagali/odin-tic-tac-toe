@@ -248,8 +248,13 @@ const controller = (function GameController() {
         scoreTextTie.textContent = ties;
     });
     playAgainButton.addEventListener("click", () => {
+        const container = resultsModal.firstElementChild;
+        const firstChild = container.firstElementChild;
+
         closeModals();
-        resultsModal.firstElementChild.removeChild(resultsModal.firstElementChild.firstElementChild);
+
+        if (firstChild.tagName === "IMG") container.removeChild(firstChild);
+
         clearBoard();
     });
 
