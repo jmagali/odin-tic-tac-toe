@@ -55,47 +55,34 @@ function Cell() {
 }
 
 function detectWinner(board, boardObj) {
-    const boardLength = board[0].length;
-    const diagLeft = [];
-    const diagRight = [];
+    const size = board.length;
 
-    // Loop through all rows
-    for (let i = 0; i < boardLength; i++) {
-        let cellOne = board[i][0].getValue();
+    // Check rows and columns
+    for (let i = 0; i < size; i++) {
+        const row = board[i];
+        const colValue = board[0][i].getValue();
 
-        // Goes through every column
-        outer: for (let k = 0; k < boardLength && i === 0; k++) {
-            cellOne = board[0][k].getValue();
-            let count = 0;
-
-            // Goes through every cell in each column
-            for (let j = 1; j < boardLength && cellOne !== 0; j++) {
-                if (board[j][k].getValue() !== cellOne) continue outer;
-                
-                count++;
-
-                // If all cells are equal
-                if (count === 2) return cellOne;
-            }
+        // Check row
+        if (row[0].getValue() !== 0 && row.every(cell => cell.getValue() === row[0].getValue())) {
+            return row[0].getValue();
         }
 
-        // If the first cell of the row is not zero, check if the row is the same == winner
-        if (cellOne) {
-            if (board[i].every(cell => cell.getValue() === cellOne)) return cellOne; // Winning mark
+        // Check column
+        if (colValue !== 0 && board.every(row => row[i].getValue() === colValue)) {
+            return colValue;
         }
-
-        // Push each diagonal to a left or right array
-        diagLeft.push(board[i][i].getValue());
-        diagRight.push(board[i][boardLength - 1 - i].getValue());
     }
 
-    // Check if somebody has won diagonally
-    if (diagLeft[0] !== 0 && diagLeft.every(cell => cell === diagLeft[0])) {
-        return diagLeft[0];
+    // Check diagonals
+    const diagLeftValue = board[0][0].getValue();
+    const diagRightValue = board[0][size - 1].getValue();
+
+    if (diagLeftValue !== 0 && board.every((row, i) => row[i].getValue() === diagLeftValue)) {
+        return diagLeftValue;
     }
 
-    if (diagRight[0] !== 0 && diagRight.every(cell => cell === diagRight[0])) {
-        return diagRight[0];
+    if (diagRightValue !== 0 && board.every((row, i) => row[size - 1 - i].getValue() === diagRightValue)) {
+        return diagRightValue;
     }
 
     // In the case of no winner
