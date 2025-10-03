@@ -63,19 +63,30 @@ function detectWinner(board, boardObj) {
     for (let i = 0; i < boardLength; i++) {
         let cellOne = board[i][0].getValue();
 
+        // Goes through every column
+        outer: for (let k = 0; k < boardLength && i === 0; k++) {
+            cellOne = board[0][k].getValue();
+            let count = 0;
+
+            // Goes through every cell in each column
+            for (let j = 1; j < boardLength && cellOne !== 0; j++) {
+                if (board[j][k].getValue() !== cellOne) continue outer;
+                
+                count++;
+
+                // If all cells are equal
+                if (count === 2) return cellOne;
+            }
+        }
+
+        // If the first cell of the row is not zero, check if the row is the same == winner
+        if (cellOne) {
+            if (board[i].every(cell => cell.getValue() === cellOne)) return cellOne; // Winning mark
+        }
+
         // Push each diagonal to a left or right array
         diagLeft.push(board[i][i].getValue());
         diagRight.push(board[i][boardLength - 1 - i].getValue());
-
-        // If the first cell of the row is not zero, check if the row/column is the same == winner
-        if (cellOne) {
-            if (board[i].every(cell => cell.getValue() === cellOne) // Checks row
-                ||
-                board.every(row => row[i].getValue() === cellOne) // Checks column
-            ) {
-                return cellOne; // Winning mark
-            }
-        }
     }
 
     // Check if somebody has won diagonally
@@ -192,6 +203,8 @@ const controller = (function GameController() {
                 item.classList.add("emptyHollow");
 
                 board[i][k].setValue(0);
+
+                activePlayer = players[0];
             }
         }
     }
@@ -278,14 +291,16 @@ const controller = (function GameController() {
                 scoreText = document.getElementById("playerXText");
                 xWins++;
                 scoreText.textContent = xWins;
-                winnerText.firstElementChild.textContent = "WINS"
+                const xText = document.getElementById("xText");
+                xText.textContent = "WINS"
                 winningMark.src = "./assets/blue-x.svg";
                 resultsModal.firstElementChild.prepend(winningMark);
             }
             else if (winner == players[1].playerMark) {
                 scoreText = document.getElementById("playerOText");
                 oWins++;
-                scoreText.textContent = oWins;
+                const oText = document.getElementById("oText");
+                oText.textContent = oWins;
                 winnerText.firstElementChild.textContent = "WINS"
                 winningMark.src = "./assets/red-o.svg";
                 resultsModal.firstElementChild.prepend(winningMark);
@@ -293,7 +308,8 @@ const controller = (function GameController() {
             else {
                 scoreText = document.getElementById("tieText");
                 ties++;
-                scoreText.textContent = ties;
+                const tieText = document.getElementById("tieText");
+                tieText.textContent = ties;
                 winnerText.firstElementChild.textContent = "TIE"
             }
 
