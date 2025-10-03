@@ -8,9 +8,8 @@
 
 ## Preview
 <div align="center" display="flex">
-    <img src="./previews/ss1.png">
-    <img src="./previews/ss2.png">
-    <img src="./previews/ss3.png">
+    <img src="./previews/preview1.png">
+    <img src="./previews/preview2.png">
 </div>
 
 ## Technologies used
