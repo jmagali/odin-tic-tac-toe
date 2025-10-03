@@ -8,7 +8,9 @@
 
 ## Preview
 <div align="center" display="flex">
+    <p>Top Half of The Scrren</p>
     <img src="./previews/preview1.png">
+    <p>Bottom Half of The Screen</p>
     <img src="./previews/preview2.png">
 </div>
 
