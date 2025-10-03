@@ -202,6 +202,7 @@ const controller = (function GameController() {
                 board[i][k].setValue(0);
 
                 activePlayer = players[0];
+                adjustTurnIndicator();
             }
         }
     }
