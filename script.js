@@ -274,6 +274,17 @@ const controller = (function GameController() {
 
     const winnerText = document.getElementById("winner");
 
+    function adjustTurnIndicator() {
+        // Adjust turn indicator
+        const turnIndicator = document.getElementById("turn-indicator");
+        const turnMarker = document.getElementById("markIndicator")
+
+        turnMarker.src = activePlayer === players[0] ? "./assets/blue-x.svg" : "./assets/red-o.svg";
+        turnMarker.alt = activePlayer === players[0] ? "Blue X Player Mark" : "Red O Player Mark";
+
+        turnIndicator.lastElementChild.style.color = activePlayer === players[0] ? "#249ebf" : "#dd2427";
+    }
+
     function playTurn(element) { 
         // Get row and column from id (split by space)
         const [row, col] = element.id.split(" ").map(Number);
@@ -285,15 +296,7 @@ const controller = (function GameController() {
         if (!winner) {
             // Switch turns
             activePlayer = activePlayer === players[0] ? players[1] : players[0];
-
-            // Adjust turn indicator
-            const turnIndicator = document.getElementById("turn-indicator");
-            const turnMarker = document.getElementById("markIndicator")
-
-            turnMarker.src = activePlayer === players[0] ? "./assets/blue-x.svg" : "./assets/red-o.svg";
-            turnMarker.alt = activePlayer === players[0] ? "Blue X Player Mark" : "Red O Player Mark";
-
-            turnIndicator.lastElementChild.style.color = activePlayer === players[0] ? "#249ebf" : "#dd2427";
+            adjustTurnIndicator();
         }
         else {
             let scoreText;
