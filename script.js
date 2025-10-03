@@ -179,6 +179,23 @@ const controller = (function GameController() {
         }
     })();
 
+    function clearBoard () {
+        for (let i = 0; i < board.length; i++) {
+            for (let k = 0; k < board[i].length; k++) {
+                const item = document.getElementById(`${i} ${k}`);
+
+                item.style.backgroundColor = "#d9d7d7";
+
+                if (item.firstElementChild) item.removeChild(item.firstElementChild);
+
+                item.classList.add("empty");
+                item.classList.add("emptyHollow");
+
+                board[i][k].setValue(0);
+            }
+        }
+    }
+
     const modalBackground = document.getElementById("modal-background");
     const resultsModal = document.getElementById("results");
     const restartConfirmModal = document.getElementById("restartConfirm");
@@ -208,10 +225,25 @@ const controller = (function GameController() {
 
     modalBackground.addEventListener("click", closeModals);
     noButton.addEventListener("click", closeModals);
-    yesButton.addEventListener("click", closeModals);
+    yesButton.addEventListener("click", () => {
+        closeModals();
+        clearBoard();
+
+        // Reset scores
+        xWins = 0, ties = 0, oWins = 0;
+
+        scoreTextX = document.getElementById("playerXText");
+        scoreTextO = document.getElementById("playerOText");
+        scoreTextTie = document.getElementById("playerXText");
+        
+        scoreTextX.textContent = xWins;
+        scoreTextO.textContent = oWins;
+        scoreTextTie.textContent = ties;
+    });
     playAgainButton.addEventListener("click", () => {
         closeModals();
         resultsModal.firstElementChild.removeChild(resultsModal.firstElementChild.firstElementChild);
+        clearBoard();
     });
 
     let players = [];
