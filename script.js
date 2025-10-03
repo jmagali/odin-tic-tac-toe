@@ -122,6 +122,16 @@ const controller = (function GameController() {
     const board = gameBoard.getBoard();
     const grid = document.getElementById("grid-container");
 
+    let players = [];
+
+    for (let i = 0; i < 2; i++) {
+        let mark = i + 1;
+
+        players.push(createPlayer(mark));
+    }
+
+    let activePlayer = players[0];
+
     (function displayBoard () {
         for (let i = 0; i < board.length; i++) {
             for (let k = 0; k < board[i].length; k++) {
@@ -259,15 +269,6 @@ const controller = (function GameController() {
         clearBoard();
     });
 
-    let players = [];
-
-    for (let i = 0; i < 2; i++) {
-        let mark = i + 1;
-
-        players.push(createPlayer(mark));
-    }
-
-    let activePlayer = players[0];
     let winner;
     let xWins = 0, ties = 0, oWins = 0;
 
@@ -281,35 +282,45 @@ const controller = (function GameController() {
 
         winner = detectWinner(board, gameBoard);
 
-        if (!winner) activePlayer = activePlayer === players[0] ? players[1] : players[0];
+        if (!winner) {
+            // Switch turns
+            activePlayer = activePlayer === players[0] ? players[1] : players[0];
+
+            // Adjust turn indicator
+            const turnIndicator = document.getElementById("turn-indicator");
+            const turnMarker = document.getElementById("markIndicator")
+
+            turnMarker.src = activePlayer === players[0] ? "./assets/blue-x.svg" : "./assets/red-o.svg";
+            turnMarker.alt = activePlayer === players[0] ? "Blue X Player Mark" : "Red O Player Mark";
+
+            turnIndicator.lastElementChild.style.color = activePlayer === players[0] ? "#249ebf" : "#dd2427";
+        }
         else {
             let scoreText;
             const winningMark = document.createElement("img");
             winningMark.classList.add("icon");
+            const winnerContainer = document.getElementById("winner");
 
             if(winner == players[0].playerMark) {
                 scoreText = document.getElementById("playerXText");
                 xWins++;
                 scoreText.textContent = xWins;
-                const xText = document.getElementById("xText");
-                xText.textContent = "WINS"
+                winnerContainer.firstElementChild.textContent = "WINS";
                 winningMark.src = "./assets/blue-x.svg";
                 resultsModal.firstElementChild.prepend(winningMark);
             }
             else if (winner == players[1].playerMark) {
                 scoreText = document.getElementById("playerOText");
                 oWins++;
-                const oText = document.getElementById("oText");
-                oText.textContent = oWins;
-                winnerText.firstElementChild.textContent = "WINS"
+                scoreText.textContent = oWins
+                winnerContainer.firstElementChild.textContent = "WINS";
                 winningMark.src = "./assets/red-o.svg";
                 resultsModal.firstElementChild.prepend(winningMark);
             }   
             else {
                 scoreText = document.getElementById("tieText");
                 ties++;
-                const tieText = document.getElementById("tieText");
-                tieText.textContent = ties;
+                scoreText.textContent = ties;
                 winnerText.firstElementChild.textContent = "TIE"
             }
 
