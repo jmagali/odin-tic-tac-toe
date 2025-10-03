@@ -3,7 +3,7 @@
 <p id="description">A tic tac toe web game. <em>This project is part of The Odin Project's <a href="https://www.theodinproject.com/lessons/node-path-javascript-tic-tac-toe" target="_blank" rel="noopener noreferrer">Fullstack JavaScript Course!</a></em></p>
 
 <p align="center">
-    <a href="https://jmagali.github.io/tic-tac-toe/">View Demo</a>
+    <a href="https://jmagali.github.io/odin-tic-tac-toe/">View Demo</a>
 </p>
 
 ## Preview
