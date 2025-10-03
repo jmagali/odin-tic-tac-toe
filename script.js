@@ -241,7 +241,7 @@ const controller = (function GameController() {
 
         scoreTextX = document.getElementById("playerXText");
         scoreTextO = document.getElementById("playerOText");
-        scoreTextTie = document.getElementById("playerXText");
+        scoreTextTie = document.getElementById("tieText");
         
         scoreTextX.textContent = xWins;
         scoreTextO.textContent = oWins;
